@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RuneScape Skilling Calculator</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px;
+            background-color: #1a1a1a;
+            color: #eee;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff99;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>RuneScape Skilling Calculator</h1>
+
+    <input type="number" id="currentLevel" placeholder="Current Level">
+    <input type="number" id="goalLevel" placeholder="Goal Level">
+    <br>
+    <button onclick="calculateXP()">Calculate XP Needed</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        // RuneScape XP Table
+        consconst xpTable = [
+    0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358,
+    1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973, 4470,
+    5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031,
+    13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473,
+    30408, 33648, 37224, 41171, 45529, 50339, 55649, 61512,
+    67983, 75127, 83014, 91721, 101333, 111945, 123660,
+    136594, 150872, 166636, 184040, 203254, 224466, 247886,
+    273742, 302288, 333804, 368599, 407015, 449428, 496254,
+    547953, 605032, 668051, 737627, 814445, 899257, 992895,
+    1096278, 1210421, 1336443, 1475581, 1629200, 1798808,
+    1986068, 2192818, 2421087, 2673114, 2951373, 3258594,
+    3597792, 3972294, 4385776, 4842295, 5346332, 5902831,
+    6517253, 7195629, 7944614, 8771558, 9684577, 10692629,
+    11805606, 13034431
+];
+
+
+        function calculateXP() {
+            const current = parseInt(document.getElementById('currentLevel').value);
+            const goal = parseInt(document.getElementById('goalLevel').value);
+
+            if (isNaN(current) || isNaN(goal) || current < 1 || goal > 99 || current >= goal) {
+                document.getElementById('result').innerHTML = "Please enter valid levels!";
+                return;
+            }
+
+            // For now, let's assume the XP for levels
+            const xpNeeded = xpTable[goal - 1] - xpTable[current - 1];
+
+            document.getElementById('result').innerHTML = 
+                `You need <span style="color:yellow;">${xpNeeded.toLocaleString()}</span> XP to reach level ${goal}!`;
+        }
+    </script>
+
+</body>
+</html>
